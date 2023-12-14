@@ -1,9 +1,16 @@
 from models import Dog
 from sqlalchemy import create_engine
+engine = create_engine('sqlite:///dogs.db')
 def create_table(base):
-    engine = create_engine('sqlite:///database.db')
-    with engine.connect() as connection:
-        base.metadata.create_all(connection)
+    sql = """
+        CREATE TABLE IF NOT EXISTS dogs (
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            breed TEXT
+        );
+    """
+
+    return engine
 def save(session, dog):
     pass
     session.add(dog)
